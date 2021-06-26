@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="danhbaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="dangnhap">
+    <Key>
+      <PropertyRef Name="TAIKHOAN" />
+    </Key>
+    <Property Name="TAIKHOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MATKHAU" Type="nvarchar" MaxLength="50" />
+    <Property Name="tennguoidung" Type="nvarchar" MaxLength="50" />
+    <Property Name="quyen" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="tenkhachhang" />
+    </Key>
+    <Property Name="tenkhachhang" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="tencongty" Type="nvarchar" MaxLength="30" />
+    <Property Name="tenlienlac" Type="nvarchar" MaxLength="30" />
+    <Property Name="thongtinlienlac" Type="nvarchar" MaxLength="30" />
+    <Property Name="diachinha" Type="nvarchar" MaxLength="60" />
+    <Property Name="thanhpho" Type="nvarchar" MaxLength="20" />
+    <Property Name="quocgia" Type="nvarchar" MaxLength="15" />
+    <Property Name="sdt" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="thongtincanhan">
+    <Key>
+      <PropertyRef Name="SoTB" />
+    </Key>
+    <Property Name="ID" Type="int" />
+    <Property Name="SoTB" Type="int" Nullable="false" />
+    <Property Name="Hoten" Type="nvarchar" MaxLength="30" />
+    <Property Name="Gioitinh" Type="bit" />
+    <Property Name="Tinh" Type="nvarchar" MaxLength="50" />
+    <Property Name="Huyen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Xa" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="thongtinnhanvien">
+    <Key>
+      <PropertyRef Name="sdt" />
+    </Key>
+    <Property Name="manhanvien" Type="int" />
+    <Property Name="tennhanvien" Type="nvarchar" MaxLength="30" />
+    <Property Name="diachi" Type="nvarchar" MaxLength="30" />
+    <Property Name="sdt" Type="int" Nullable="false" />
+    <Property Name="gioitinh" Type="bit" />
+    <Property Name="email" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <Function Name="getallkhachhang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="danhbaModelStoreContainer">
+    <EntitySet Name="dangnhap" EntityType="Self.dangnhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="khachhang" EntityType="Self.khachhang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="thongtincanhan" EntityType="Self.thongtincanhan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="thongtinnhanvien" EntityType="Self.thongtinnhanvien" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

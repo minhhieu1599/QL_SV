@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="danhbaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'danhba.dbo.chucvu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="chucvu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hoten" Type="nvarchar" MaxLength="50" />
+    <Property Name="Manv" Type="int" />
+    <Property Name="Chucvu" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="dangnhap">
+    <Key>
+      <PropertyRef Name="TAIKHOAN" />
+    </Key>
+    <Property Name="TAIKHOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MATKHAU" Type="nvarchar" MaxLength="50" />
+    <Property Name="tennguoidung" Type="nvarchar" MaxLength="50" />
+    <Property Name="quyen" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="tenkhachhang" />
+    </Key>
+    <Property Name="tenkhachhang" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="tencongty" Type="nvarchar" MaxLength="30" />
+    <Property Name="tenlienlac" Type="nvarchar" MaxLength="30" />
+    <Property Name="thongtinlienlac" Type="nvarchar" MaxLength="30" />
+    <Property Name="diachinha" Type="nvarchar" MaxLength="60" />
+    <Property Name="thanhpho" Type="nvarchar" MaxLength="20" />
+    <Property Name="quocgia" Type="nvarchar" MaxLength="15" />
+    <Property Name="sdt" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="thongtincanhan">
+    <Key>
+      <PropertyRef Name="Sdt" />
+    </Key>
+    <Property Name="ID" Type="int" />
+    <Property Name="Sdt" Type="int" Nullable="false" />
+    <Property Name="Hoten" Type="nvarchar" MaxLength="30" />
+    <Property Name="Tinh" Type="nvarchar" MaxLength="50" />
+    <Property Name="Huyen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Xa" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gioitinh" Type="bit" />
+  </EntityType>
+  <EntityType Name="thongtinnhanvien">
+    <Key>
+      <PropertyRef Name="sdt" />
+    </Key>
+    <Property Name="manhanvien" Type="int" />
+    <Property Name="tennhanvien" Type="nvarchar" MaxLength="30" />
+    <Property Name="diachi" Type="nvarchar" MaxLength="30" />
+    <Property Name="sdt" Type="int" Nullable="false" />
+    <Property Name="gioitinh" Type="bit" />
+    <Property Name="email" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_khachhang_thongtincanhan">
+    <End Role="thongtincanhan" Type="Self.thongtincanhan" Multiplicity="0..1" />
+    <End Role="khachhang" Type="Self.khachhang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="thongtincanhan">
+        <PropertyRef Name="Sdt" />
+      </Principal>
+      <Dependent Role="khachhang">
+        <PropertyRef Name="sdt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="cn_timkiem_thongtincanhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="danhba_update_thongtin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="varID" Type="int" Mode="In" />
+    <Parameter Name="varSdt" Type="int" Mode="In" />
+    <Parameter Name="varHoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="varTinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="varHuyen" Type="nvarchar" Mode="In" />
+    <Parameter Name="varXa" Type="nvarchar" Mode="In" />
+    <Parameter Name="varGioitinh" Type="bit" Mode="In" />
+    <Parameter Name="varngay" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="danhba_update_thongtincanhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="varID" Type="int" Mode="In" />
+    <Parameter Name="varSdt" Type="int" Mode="In" />
+    <Parameter Name="varHoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="varTinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="varHuyen" Type="nvarchar" Mode="In" />
+    <Parameter Name="varXa" Type="nvarchar" Mode="In" />
+    <Parameter Name="varGioitinh" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="db_Searchthongtincanhan_Hoten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vHoten" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="db_Searchthongtincanhan_SDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vSdt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="demsoluong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="getalldanhba" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getallkhachhang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Procedure_thongtin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="seaechthongtincanhan_nn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vHoten" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="search_thongtincanhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vID" Type="int" Mode="In" />
+    <Parameter Name="vSdt" Type="int" Mode="In" />
+    <Parameter Name="vHoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="vTinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="vHuyen" Type="nvarchar" Mode="In" />
+    <Parameter Name="vXa" Type="nvarchar" Mode="In" />
+    <Parameter Name="vGiotinh" Type="bit" Mode="In" />
+    <Parameter Name="vngay" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_InsertThongtincanhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vID" Type="int" Mode="In" />
+    <Parameter Name="vSdt" Type="int" Mode="In" />
+    <Parameter Name="vHoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="vTinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="vHuyen" Type="nvarchar" Mode="In" />
+    <Parameter Name="vXa" Type="nvarchar" Mode="In" />
+    <Parameter Name="vGiotinh" Type="bit" Mode="In" />
+    <Parameter Name="vngay" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="SP_InsertThongtincanhan_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vID" Type="int" Mode="In" />
+    <Parameter Name="vSdt" Type="int" Mode="In" />
+    <Parameter Name="vHoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="vTinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="vHuyen" Type="nvarchar" Mode="In" />
+    <Parameter Name="vXa" Type="nvarchar" Mode="In" />
+    <Parameter Name="vGiotinh" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_Xoahongtincanhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="thongke" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="thongkekhuvu_tinh_huyen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vID" Type="int" Mode="In" />
+    <Parameter Name="vSdt" Type="int" Mode="In" />
+    <Parameter Name="vHoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="vtinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="vhuyen" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="thongtin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="danhbaModelStoreContainer">
+    <EntitySet Name="dangnhap" EntityType="Self.dangnhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="khachhang" EntityType="Self.khachhang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="thongtincanhan" EntityType="Self.thongtincanhan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="thongtinnhanvien" EntityType="Self.thongtinnhanvien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chucvu" EntityType="Self.chucvu" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [chucvu].[ID] AS [ID], 
+    [chucvu].[Hoten] AS [Hoten], 
+    [chucvu].[Manv] AS [Manv], 
+    [chucvu].[Chucvu] AS [Chucvu]
+    FROM [dbo].[chucvu] AS [chucvu]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_khachhang_thongtincanhan" Association="Self.FK_khachhang_thongtincanhan">
+      <End Role="thongtincanhan" EntitySet="thongtincanhan" />
+      <End Role="khachhang" EntitySet="khachhang" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,15 @@
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\quanlykhachhang.exe.config
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\quanlykhachhang.exe
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\quanlykhachhang.pdb
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.csprojAssemblyReference.cache
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.Form1.resources
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.Properties.Resources.resources
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.csproj.GenerateResource.cache
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.csproj.CoreCompileInputs.cache
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.exe
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.pdb
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\EntityFramework.dll
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\EntityFramework.SqlServer.dll
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\EntityFramework.xml
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\bin\Debug\EntityFramework.SqlServer.xml
+D:\danhbadienthoai\customer\quanlykhachhang\quanlykhachhang\obj\Debug\quanlykhachhang.csproj.CopyComplete

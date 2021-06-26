@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="danhbaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="dangnhap">
+    <Key>
+      <PropertyRef Name="TAIKHOAN" />
+    </Key>
+    <Property Name="TAIKHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MATKHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tennguoidung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="tenkhachhang" />
+    </Key>
+    <Property Name="tenkhachhang" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tencongty" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="tenlienlac" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="thongtinlienlac" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="diachinha" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="thanhpho" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="quocgia" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="sdt" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="thongtincanhan">
+    <Key>
+      <PropertyRef Name="SoTB" />
+    </Key>
+    <Property Name="ID" Type="Int32" />
+    <Property Name="SoTB" Type="Int32" Nullable="false" />
+    <Property Name="Hoten" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Gioitinh" Type="Boolean" />
+    <Property Name="Tinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Huyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Xa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="thongtinnhanvien">
+    <Key>
+      <PropertyRef Name="sdt" />
+    </Key>
+    <Property Name="manhanvien" Type="Int32" />
+    <Property Name="tennhanvien" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="diachi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="sdt" Type="Int32" Nullable="false" />
+    <Property Name="gioitinh" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="danhbaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="dangnhaps" EntityType="Self.dangnhap" />
+    <EntitySet Name="khachhangs" EntityType="Self.khachhang" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="thongtincanhans" EntityType="Self.thongtincanhan" />
+    <EntitySet Name="thongtinnhanviens" EntityType="Self.thongtinnhanvien" />
+    <FunctionImport Name="getallkhachhang" ReturnType="Collection(danhbaModel.getallkhachhang_Result)" />
+  </EntityContainer>
+  <ComplexType Name="getallkhachhang_Result">
+    <Property Type="String" Name="tenkhachhang" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="tencongty" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="tenlienlac" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="thongtinlienlac" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="diachinha" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="thanhpho" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="quocgia" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="sdt" Nullable="true" />
+  </ComplexType>
+</Schema>

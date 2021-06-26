@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="danhbaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dangnhap">
+          <Key>
+            <PropertyRef Name="TAIKHOAN" />
+          </Key>
+          <Property Name="TAIKHOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MATKHAU" Type="nvarchar" MaxLength="50" />
+          <Property Name="tennguoidung" Type="nvarchar" MaxLength="50" />
+          <Property Name="quyen" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="khachhang">
+          <Key>
+            <PropertyRef Name="tenkhachhang" />
+          </Key>
+          <Property Name="tenkhachhang" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="tencongty" Type="nvarchar" MaxLength="30" />
+          <Property Name="tenlienlac" Type="nvarchar" MaxLength="30" />
+          <Property Name="thongtinlienlac" Type="nvarchar" MaxLength="30" />
+          <Property Name="diachinha" Type="nvarchar" MaxLength="60" />
+          <Property Name="thanhpho" Type="nvarchar" MaxLength="20" />
+          <Property Name="quocgia" Type="nvarchar" MaxLength="15" />
+          <Property Name="sdt" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="thongtincanhan">
+          <Key>
+            <PropertyRef Name="SoTB" />
+          </Key>
+          <Property Name="ID" Type="int" />
+          <Property Name="SoTB" Type="int" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="30" />
+          <Property Name="Gioitinh" Type="bit" />
+          <Property Name="Tinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="Huyen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Xa" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="thongtinnhanvien">
+          <Key>
+            <PropertyRef Name="sdt" />
+          </Key>
+          <Property Name="manhanvien" Type="int" />
+          <Property Name="tennhanvien" Type="nvarchar" MaxLength="30" />
+          <Property Name="diachi" Type="nvarchar" MaxLength="30" />
+          <Property Name="sdt" Type="int" Nullable="false" />
+          <Property Name="gioitinh" Type="bit" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Function Name="getallkhachhang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="danhbaModelStoreContainer">
+          <EntitySet Name="dangnhap" EntityType="Self.dangnhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="khachhang" EntityType="Self.khachhang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="thongtincanhan" EntityType="Self.thongtincanhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="thongtinnhanvien" EntityType="Self.thongtinnhanvien" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="danhbaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dangnhap">
+          <Key>
+            <PropertyRef Name="TAIKHOAN" />
+          </Key>
+          <Property Name="TAIKHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MATKHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tennguoidung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="khachhang">
+          <Key>
+            <PropertyRef Name="tenkhachhang" />
+          </Key>
+          <Property Name="tenkhachhang" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tencongty" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="tenlienlac" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="thongtinlienlac" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="diachinha" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="thanhpho" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="quocgia" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="sdt" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="thongtincanhan">
+          <Key>
+            <PropertyRef Name="SoTB" />
+          </Key>
+          <Property Name="ID" Type="Int32" />
+          <Property Name="SoTB" Type="Int32" Nullable="false" />
+          <Property Name="Hoten" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Gioitinh" Type="Boolean" />
+          <Property Name="Tinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Huyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Xa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="thongtinnhanvien">
+          <Key>
+            <PropertyRef Name="sdt" />
+          </Key>
+          <Property Name="manhanvien" Type="Int32" />
+          <Property Name="tennhanvien" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="diachi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="sdt" Type="Int32" Nullable="false" />
+          <Property Name="gioitinh" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="danhbaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dangnhaps" EntityType="Self.dangnhap" />
+          <EntitySet Name="khachhangs" EntityType="Self.khachhang" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="thongtincanhans" EntityType="Self.thongtincanhan" />
+          <EntitySet Name="thongtinnhanviens" EntityType="Self.thongtinnhanvien" />
+          <FunctionImport Name="getallkhachhang" ReturnType="Collection(danhbaModel.getallkhachhang_Result)" />
+        </EntityContainer>
+        <ComplexType Name="getallkhachhang_Result">
+          <Property Type="String" Name="tenkhachhang" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="tencongty" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="tenlienlac" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="thongtinlienlac" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="diachinha" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="thanhpho" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="quocgia" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="sdt" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="danhbaModelStoreContainer" CdmEntityContainer="danhbaEntities">
+          <EntitySetMapping Name="dangnhaps">
+            <EntityTypeMapping TypeName="danhbaModel.dangnhap">
+              <MappingFragment StoreEntitySet="dangnhap">
+                <ScalarProperty Name="TAIKHOAN" ColumnName="TAIKHOAN" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="tennguoidung" ColumnName="tennguoidung" />
+                <ScalarProperty Name="quyen" ColumnName="quyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="khachhangs">
+            <EntityTypeMapping TypeName="danhbaModel.khachhang">
+              <MappingFragment StoreEntitySet="khachhang">
+                <ScalarProperty Name="tenkhachhang" ColumnName="tenkhachhang" />
+                <ScalarProperty Name="tencongty" ColumnName="tencongty" />
+                <ScalarProperty Name="tenlienlac" ColumnName="tenlienlac" />
+                <ScalarProperty Name="thongtinlienlac" ColumnName="thongtinlienlac" />
+                <ScalarProperty Name="diachinha" ColumnName="diachinha" />
+                <ScalarProperty Name="thanhpho" ColumnName="thanhpho" />
+                <ScalarProperty Name="quocgia" ColumnName="quocgia" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="danhbaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="thongtincanhans">
+            <EntityTypeMapping TypeName="danhbaModel.thongtincanhan">
+              <MappingFragment StoreEntitySet="thongtincanhan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SoTB" ColumnName="SoTB" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
+                <ScalarProperty Name="Tinh" ColumnName="Tinh" />
+                <ScalarProperty Name="Huyen" ColumnName="Huyen" />
+                <ScalarProperty Name="Xa" ColumnName="Xa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="thongtinnhanviens">
+            <EntityTypeMapping TypeName="danhbaModel.thongtinnhanvien">
+              <MappingFragment StoreEntitySet="thongtinnhanvien">
+                <ScalarProperty Name="manhanvien" ColumnName="manhanvien" />
+                <ScalarProperty Name="tennhanvien" ColumnName="tennhanvien" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+                <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getallkhachhang" FunctionName="danhbaModel.Store.getallkhachhang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="danhbaModel.getallkhachhang_Result">
+                <ScalarProperty Name="tenkhachhang" ColumnName="tenkhachhang" />
+                <ScalarProperty Name="tencongty" ColumnName="tencongty" />
+                <ScalarProperty Name="tenlienlac" ColumnName="tenlienlac" />
+                <ScalarProperty Name="thongtinlienlac" ColumnName="thongtinlienlac" />
+                <ScalarProperty Name="diachinha" ColumnName="diachinha" />
+                <ScalarProperty Name="thanhpho" ColumnName="thanhpho" />
+                <ScalarProperty Name="quocgia" ColumnName="quocgia" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="danhbadienthoaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="dangnhap">
+    <Key>
+      <PropertyRef Name="TAIKHOAN" />
+    </Key>
+    <Property Name="TAIKHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MATKHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tennguoidung" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="quyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="khachhang">
+    <Key>
+      <PropertyRef Name="sdt" />
+    </Key>
+    <Property Name="tenkhachhang" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="tenlienlac" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="thongtinlienlac" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="sdt" Type="Int32" Nullable="false" />
+    <Property Name="diachinha" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="tencongty" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="thanhpho" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="quocgia" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="thongtincanhans" Relationship="Self.fk_thongtincanhan_khachhang" FromRole="khachhang" ToRole="thongtincanhan" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="thongtincanhan">
+    <Key>
+      <PropertyRef Name="Hoten" />
+    </Key>
+    <Property Name="ID" Type="Int32" />
+    <Property Name="Sdt" Type="Int32" />
+    <Property Name="Hoten" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Huyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Xa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gioitinh" Type="Boolean" />
+    <NavigationProperty Name="khachhang" Relationship="Self.fk_thongtincanhan_khachhang" FromRole="thongtincanhan" ToRole="khachhang" />
+  </EntityType>
+  <EntityType Name="thongtinnhanvien">
+    <Key>
+      <PropertyRef Name="gioitinh" />
+    </Key>
+    <Property Name="manhanvien" Type="Int32" />
+    <Property Name="tennhanvien" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="diachi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="sdt" Type="Int32" />
+    <Property Name="gioitinh" Type="Boolean" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="fk_thongtincanhan_khachhang">
+    <End Role="khachhang" Type="Self.khachhang" Multiplicity="0..1" />
+    <End Role="thongtincanhan" Type="Self.thongtincanhan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="khachhang">
+        <PropertyRef Name="sdt" />
+      </Principal>
+      <Dependent Role="thongtincanhan">
+        <PropertyRef Name="Sdt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="danhbadienthoaiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="dangnhaps" EntityType="Self.dangnhap" />
+    <EntitySet Name="khachhangs" EntityType="Self.khachhang" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="thongtincanhans" EntityType="Self.thongtincanhan" />
+    <EntitySet Name="thongtinnhanviens" EntityType="Self.thongtinnhanvien" />
+    <AssociationSet Name="fk_thongtincanhan_khachhang" Association="Self.fk_thongtincanhan_khachhang">
+      <End Role="khachhang" EntitySet="khachhangs" />
+      <End Role="thongtincanhan" EntitySet="thongtincanhans" />
+    </AssociationSet>
+    <FunctionImport Name="cn_timkiem_thongtincanhan" ReturnType="Collection(danhbadienthoaiModel.cn_timkiem_thongtincanhan_Result)" />
+    <FunctionImport Name="danhba_update_thongtin">
+      <Parameter Name="varID" Mode="In" Type="Int32" />
+      <Parameter Name="varSdt" Mode="In" Type="Int32" />
+      <Parameter Name="varHoten" Mode="In" Type="String" />
+      <Parameter Name="varTinh" Mode="In" Type="String" />
+      <Parameter Name="varHuyen" Mode="In" Type="String" />
+      <Parameter Name="varXa" Mode="In" Type="String" />
+      <Parameter Name="varGioitinh" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="db_Searchthongtincanhan_Hoten" ReturnType="Collection(danhbadienthoaiModel.db_Searchthongtincanhan_Hoten_Result)">
+      <Parameter Name="vHoten" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="db_Searchthongtincanhan_Sdt" ReturnType="Collection(danhbadienthoaiModel.db_Searchthongtincanhan_Sdt_Result)">
+      <Parameter Name="vSdt" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getalldanhba" ReturnType="Collection(danhbadienthoaiModel.getalldanhba_Result)" />
+    <FunctionImport Name="getallkhachhang" ReturnType="Collection(danhbadienthoaiModel.getallkhachhang_Result)" />
+    <FunctionImport Name="Procedure_thongtin" ReturnType="Collection(danhbadienthoaiModel.Procedure_thongtin_Result)" />
+    <FunctionImport Name="seaechthongtincanhan_nn" ReturnType="Collection(danhbadienthoaiModel.seaechthongtincanhan_nn_Result)">
+      <Parameter Name="vHoten" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="search_thongtincanhan" ReturnType="Collection(danhbadienthoaiModel.search_thongtincanhan_Result)">
+      <Parameter Name="vID" Mode="In" Type="Int32" />
+      <Parameter Name="vSdt" Mode="In" Type="Int32" />
+      <Parameter Name="vHoten" Mode="In" Type="String" />
+      <Parameter Name="vTinh" Mode="In" Type="String" />
+      <Parameter Name="vHuyen" Mode="In" Type="String" />
+      <Parameter Name="vXa" Mode="In" Type="String" />
+      <Parameter Name="vGiotinh" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(danhbadienthoaiModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(danhbadienthoaiModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_InsertThongtincanhan">
+      <Parameter Name="vID" Mode="In" Type="Int32" />
+      <Parameter Name="vSdt" Mode="In" Type="Int32" />
+      <Parameter Name="vHoten" Mode="In" Type="String" />
+      <Parameter Name="vTinh" Mode="In" Type="String" />
+      <Parameter Name="vHuyen" Mode="In" Type="String" />
+      <Parameter Name="vXa" Mode="In" Type="String" />
+      <Parameter Name="vGiotinh" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="SP_Xoahongtincanhan">
+      <Parameter Name="vID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="thongtin" ReturnType="Collection(danhbadienthoaiModel.thongtin_Result)" />
+  </EntityContainer>
+  <ComplexType Name="cn_timkiem_thongtincanhan_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_Searchthongtincanhan_Hoten_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="db_Searchthongtincanhan_Sdt_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getalldanhba_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getallkhachhang_Result">
+    <Property Type="String" Name="tenkhachhang" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="tenlienlac" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="thongtinlienlac" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="sdt" Nullable="false" />
+    <Property Type="String" Name="diachinha" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="tencongty" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="thanhpho" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="quocgia" Nullable="true" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="Procedure_thongtin_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="seaechthongtincanhan_nn_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="search_thongtincanhan_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="thongtin_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="Sdt" Nullable="true" />
+    <Property Type="String" Name="Hoten" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Tinh" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Huyen" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xa" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Gioitinh" Nullable="true" />
+  </ComplexType>
+</Schema>
